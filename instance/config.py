@@ -1,7 +1,4 @@
-import os
+# config.py
 
-class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'my-secret-key'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///app.db'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    ITEMS_PER_PAGE = 10
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:admin@localhost:5433/hyve'
+SQLALCHEMY_TRACK_MODIFICATIONS = False

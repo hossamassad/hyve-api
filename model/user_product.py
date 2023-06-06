@@ -1,7 +1,11 @@
-from database import db
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm.exc import NoResultFound
 
-class UserProducts(db.Model):
+db = SQLAlchemy()
+class UserProduct(db.Model):
     __tablename__ = 'user_products'
+
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), primary_key=True)
 
@@ -10,10 +14,4 @@ class UserProducts(db.Model):
         self.product_id = product_id
 
     def __repr__(self):
-        return f"<UserProduct {self.user_id} - {self.product_id}>"
-
-    def to_dict(self):
-        return {
-            'user_id': self.user_id,
-            'product_id': self.product_id
-        }
+        return f'<UserProduct {self.user_id}:{self.product_id}>'
