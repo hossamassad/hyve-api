@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from services.products import get_all_products ,get_product,add_product,update_product,delete_product
 
-product_bp = Blueprint('api', __name__)
+product_bp = Blueprint('product', __name__)
 
 @product_bp.route('/products')
 @product_bp.route('/products/<int:product_id>')
