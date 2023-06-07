@@ -1,20 +1,18 @@
-# app.py
 from flask import Flask
-from model.user import db
-from model.product import db
-from model.user_product import db
-from controller.user_product_controller import api_bp
-from controller.product_controller import product_bp
-from controller.user_controller import user_bp
-import instance.config as config
+from instance import config
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS
+app.config.from_object(config)
+db = SQLAlchemy(app)
 
-db.init_app(app)
+from controller.user_controller import user_bp
+from controller.product_controller import product_bp
+from controller.user_product_controller import api_bp
 
-app.register_blueprint(api_bp, url_prefix='/api')
+app.register_blueprint(user_bp)
+app.register_blueprint(product_bp)
+app.register_blueprint(api_bp)
 
 if __name__ == '__main__':
     app.run(debug=True)
