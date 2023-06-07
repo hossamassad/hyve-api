@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from services.users import get_all_users, get_user, add_user, update_user, delete_user
 
-user_bp = Blueprint('api', __name__)
+user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/users')
 @user_bp.route('/users/<int:user_id>')
